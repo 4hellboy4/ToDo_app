@@ -17,19 +17,20 @@ class TodoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      endActionPane: ActionPane(
-        motion: StretchMotion(),
-        children: [
-          SlidableAction(
-            onPressed: deleteToDoTask,
-            icon: Icons.delete,
-            backgroundColor: Colors.red,
-          )
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+    return Padding(
+      padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: const StretchMotion(),
+          children: [
+            SlidableAction(
+              onPressed: deleteToDoTask,
+              icon: Icons.delete,
+              backgroundColor: Colors.red.shade300,
+              borderRadius: BorderRadius.circular(12),
+            )
+          ],
+        ),
         child: Container(
           padding: const EdgeInsets.all(20.0),
           decoration: BoxDecoration(
