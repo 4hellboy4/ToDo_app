@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app2/utils/dialog_box.dart';
 import 'package:todo_app2/utils/todo_tile.dart';
 
 class Home extends StatefulWidget {
@@ -20,6 +21,15 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void createNewToDoTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +48,10 @@ class _HomeState extends State<Home> {
             onChanged: (value) => checkBoxIsChanged(value, index),
           );
         }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: createNewToDoTask,
+        child: const Icon(Icons.add),
       ),
     );
   }

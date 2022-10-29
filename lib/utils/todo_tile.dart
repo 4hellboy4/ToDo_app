@@ -22,7 +22,7 @@ class TodoTile extends StatelessWidget {
             color: const Color.fromARGB(255, 162, 37, 184),
             borderRadius: BorderRadius.circular(12)),
         child: Row(
-          children: [
+          children: <Widget>[
             //Check if task is complited
             Checkbox(
               value: isComplited,
