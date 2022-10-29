@@ -19,7 +19,7 @@ class DialogBox extends StatelessWidget {
       backgroundColor: Colors.purple[200],
       content: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
-        height: 160,
+        height: 140,
         child: Column(
           //Get user input
           children: [

@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //Text controller
-  final _controller = TextEditingController();
+  TextEditingController _controller = TextEditingController();
 
   final box = Hive.box("myBox");
   ToDoDataBase db = ToDoDataBase();
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
     db.upgradeDatatoDataBase();
   }
 
-  //SAve a new ToDo task
+  //Save a new ToDo task
   void saveNewTask() {
     setState(() {
       db.toDoList.add([_controller.text, false]);
@@ -59,11 +59,38 @@ class _HomeState extends State<Home> {
     );
   }
 
+  //Deleting the task
   void deleteTask(int index) {
     setState(() {
       db.toDoList.removeAt(index);
     });
     db.upgradeDatatoDataBase();
+  }
+
+  //Editing the name of the text
+  void editTheTextOfTheTask(
+      int index, TextEditingController editingController) {
+    setState(() {
+      db.toDoList[index][0] = editingController.text;
+      editingController.clear();
+    });
+    Navigator.of(context).pop();
+    db.upgradeDatatoDataBase();
+  }
+
+  void editTask(int index) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController _editingController =
+            TextEditingController(text: db.toDoList[index][0]);
+        return DialogBox(
+          controller: _editingController,
+          onCancel: () => Navigator.of(context).pop(),
+          onSave: () => editTheTextOfTheTask(index, _editingController),
+        );
+      },
+    );
   }
 
   @override
@@ -83,6 +110,7 @@ class _HomeState extends State<Home> {
             isComplited: db.toDoList[index][1],
             onChanged: (value) => checkBoxIsChanged(value, index),
             deleteToDoTask: (context) => deleteTask(index),
+            editToDoTask: (context) => editTask(index),
           );
         }),
       ),
