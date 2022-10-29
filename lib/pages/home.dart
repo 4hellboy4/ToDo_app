@@ -10,10 +10,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List ToDoLIst = [
-    ["Do exercise", false],
-    ["Make a video", true]
-  ];
+  //Text controller
+  final _controller = TextEditingController();
+
+  //List of ToDo tasks
+  List<dynamic> ToDoLIst = [];
 
   void checkBoxIsChanged(bool? value, int index) {
     setState(() {
@@ -21,11 +22,24 @@ class _HomeState extends State<Home> {
     });
   }
 
+  //SAve a new ToDo task
+  void saveNewTask() {
+    setState(() {
+      ToDoLIst.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
   void createNewToDoTask() {
     showDialog(
       context: context,
       builder: (context) {
-        return DialogBox();
+        return DialogBox(
+          controller: _controller,
+          onCancel: () => Navigator.of(context).pop(),
+          onSave: saveNewTask,
+        );
       },
     );
   }
