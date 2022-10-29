@@ -19,7 +19,7 @@ class DialogBox extends StatelessWidget {
       backgroundColor: Colors.purple[200],
       content: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
-        height: 140,
+        height: 160,
         child: Column(
           //Get user input
           children: [
@@ -29,20 +29,21 @@ class DialogBox extends StatelessWidget {
                   border: OutlineInputBorder(), hintText: "Add a new task"),
             ),
 
-            const SizedBox(height: 12),
-
             //Save and Cancel buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                //Cancel button
-                MyButton(nameOfTheButton: "Cancel", onPressed: onCancel),
-                //Save button
-                MyButton(
-                  nameOfTheButton: "Save",
-                  onPressed: onSave,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  //Cancel button
+                  MyButton(nameOfTheButton: "Cancel", onPressed: onCancel),
+                  //Save button
+                  MyButton(
+                    nameOfTheButton: "Save",
+                    onPressed: onSave,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
